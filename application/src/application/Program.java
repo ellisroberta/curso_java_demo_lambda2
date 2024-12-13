@@ -5,6 +5,7 @@ import util.ProductPredicate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Program {
 
@@ -18,8 +19,13 @@ public class Program {
         list.add(new Product("Tablet", 350.50));
         list.add(new Product("HD Case", 80.90));
 
-        // Remove produtos da lista onde o preço é maior ou igual a 100 usando referência a método não estático
-        list.removeIf(Product::nonStaticProductPredicate);
+        double min = 100.0; // Define o preço mínimo
+
+        // Declara uma expressão lambda que verifica se o preço do produto é maior ou igual a min
+        Predicate<Product> pred = p -> p.getPrice() >= min;
+
+        // Remove produtos da lista que atendem ao critério do predicado
+        list.removeIf(pred);
 
         // Imprime os produtos restantes na lista
         for (Product p : list) {

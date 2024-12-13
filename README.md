@@ -76,3 +76,35 @@ dentro das instâncias da classe Product.
 
 ## Expressão lambda declarada
 
+* Criação da Lista de Produtos:
+  * O programa cria uma lista (ArrayList) e adiciona quatro produtos com seus respectivos preços.
+
+* Definição do Preço Mínimo:
+  * Um valor mínimo (min) é definido como 100.0, que será usado para filtrar os produtos.
+
+* Uso de Expressão Lambda:
+  * A expressão lambda p -> p.getPrice() >= min é definida como um predicado (Predicate<Product>). Aqui:
+    * p é o parâmetro que representa uma instância da classe Product.
+    * p.getPrice() >= min é a condição que verifica se o preço do produto p é maior ou igual a min.
+  * As expressões lambda permitem criar implementações de interfaces funcionais de maneira concisa e legível.
+
+* Remoção de Produtos:
+  * O método removeIf(pred) é chamado na lista, que itera sobre cada produto. 
+  Se a condição do predicado for verdadeira (ou seja, se o preço do produto for maior ou igual a 100),
+  o produto será removido da lista.
+
+* Impressão dos Produtos Restantes:
+  * Após a remoção, o programa imprime os produtos restantes na lista, que são aqueles com preço inferior a 100.
+
+### Resultado do Programa
+Ao executar o programa, a saída será a lista de produtos que têm preço inferior a 100.
+Portanto, neste caso, o resultado da execução será:
+
+```
+Mouse, 50.00
+HD Case, 80.90
+```
+
+Os produtos "Tv" e "Tablet" foram removidos da lista porque seus preços eram iguais ou superiores a 100.
+Essa implementação demonstra como as expressões lambda podem simplificar o código e torná-lo mais legível ao lidar com 
+operações de filtragem em coleções.
