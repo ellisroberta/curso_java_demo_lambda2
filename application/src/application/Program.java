@@ -5,7 +5,6 @@ import util.ProductPredicate;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
 public class Program {
 
@@ -21,11 +20,8 @@ public class Program {
 
         double min = 100.0; // Define o preço mínimo
 
-        // Declara uma expressão lambda que verifica se o preço do produto é maior ou igual a min
-        Predicate<Product> pred = p -> p.getPrice() >= min;
-
-        // Remove produtos da lista que atendem ao critério do predicado
-        list.removeIf(pred);
+        // Expressão lambda inline para remover produtos com preço maior ou igual a min
+        list.removeIf(p -> p.getPrice() >= min);
 
         // Imprime os produtos restantes na lista
         for (Product p : list) {

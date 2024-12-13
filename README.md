@@ -108,3 +108,38 @@ HD Case, 80.90
 Os produtos "Tv" e "Tablet" foram removidos da lista porque seus preços eram iguais ou superiores a 100.
 Essa implementação demonstra como as expressões lambda podem simplificar o código e torná-lo mais legível ao lidar com 
 operações de filtragem em coleções.
+
+## Expressão lambda inline
+
+* Criação da Lista de Produtos:
+  * O programa cria uma lista (ArrayList) e adiciona quatro produtos com seus respectivos preços.
+
+* Definição do Preço Mínimo:
+  * Um valor mínimo (min) é definido como 100.0, que será usado para filtrar os produtos.
+
+* Uso da Expressão Lambda Inline:
+  * A linha list.removeIf(p -> p.getPrice() >= min); utiliza uma expressão lambda inline.
+  Aqui, p representa cada instância de Product na lista.
+  * A expressão p -> p.getPrice() >= min é uma implementação da interface funcional Predicate<Product>,
+  que indica que queremos remover produtos cujo preço é maior ou igual a min.
+  * Essa é uma forma concisa de passar uma implementação de um método que aceita um Product e retorna um boolean.
+
+* Remoção de Produtos:
+  * O método removeIf itera sobre a lista e aplica a expressão lambda a cada produto. 
+  Se a condição for verdadeira (ou seja, se o preço do produto for maior ou igual a 100), o produto será removido da lista.
+
+* Impressão dos Produtos Restantes:
+  * Após a remoção, o programa imprime os produtos restantes na lista, que são aqueles com preço inferior a 100.
+
+### Resultado do Programa
+Ao executar o programa, a saída será a lista de produtos que têm preço inferior a 100.
+Portanto, neste caso, o resultado da execução será:
+
+```
+Mouse, 50.00
+HD Case, 80.90
+```
+
+Os produtos "Tv" e "Tablet" foram removidos da lista porque seus preços eram iguais ou superiores a 100. 
+A utilização de uma expressão lambda inline permite que o código seja mais limpo e fácil de entender, 
+ao mesmo tempo que mantém toda a lógica necessária para a filtragem dos produtos.
