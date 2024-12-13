@@ -18,8 +18,7 @@ public class Program {
         list.add(new Product("Tablet", 350.50));
         list.add(new Product("HD Case", 80.90));
 
-        // Remove produtos da lista onde o preço é maior ou igual a 100 usando o método estático
-        list.removeIf(Product::staticProductPredicate);
+        list.removeIf(Product::nonStaticProductPredicate);
 
         // Imprime os produtos restantes na lista
         for (Product p : list) {
