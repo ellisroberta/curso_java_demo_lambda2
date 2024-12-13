@@ -73,3 +73,6 @@ HD Case, 80.90
 Os produtos "Tv" e "Tablet" foram removidos da lista porque seus preços eram iguais ou superiores a 100. 
 A utilização de referência a método não estático permite que o código permaneça legível e mantenha a lógica encapsulada 
 dentro das instâncias da classe Product.
+
+## Expressão lambda declarada
+

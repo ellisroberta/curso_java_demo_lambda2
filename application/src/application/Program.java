@@ -18,6 +18,7 @@ public class Program {
         list.add(new Product("Tablet", 350.50));
         list.add(new Product("HD Case", 80.90));
 
+        // Remove produtos da lista onde o preço é maior ou igual a 100 usando referência a método não estático
         list.removeIf(Product::nonStaticProductPredicate);
 
         // Imprime os produtos restantes na lista
