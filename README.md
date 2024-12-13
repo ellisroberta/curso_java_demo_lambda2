@@ -16,3 +16,19 @@ Fazer um programa que, a partir de uma lista de produtos, remova da lista soment
   * Representa um produto com atributos name e price. 
   * Contém métodos para acessar e modificar esses atributos (getters e setters). 
   * Tem um método toString que formata a saída do produto, facilitando a visualização.
+
+## Reference method com método estático
+
+* Referência a Método Estático:
+  * A linha list.removeIf(Product::staticProductPredicate); utiliza uma referência a método estático. Aqui, Product::staticProductPredicate é uma forma concisa de passar o método staticProductPredicate como um predicado para o método removeIf.
+  * O método removeIf itera sobre a lista e chama staticProductPredicate para cada produto. Se o método retornar true, o produto é removido da lista.
+
+* Método Estático staticProductPredicate:
+
+  * Este método é declarado como static, o que significa que ele pertence à classe Product e pode ser chamado sem a necessidade de instanciar um objeto da classe.
+  * O método recebe um objeto Product como argumento e retorna um booleano indicando se o preço do produto é igual ou superior a 100.
+
+* Funcionalidade do Programa:
+
+  * O programa cria uma lista de produtos, adiciona alguns produtos e, em seguida, remove aqueles cujo preço é maior ou igual a 100 usando a referência ao método estático.
+  * Finalmente, imprime os produtos restantes na lista.
