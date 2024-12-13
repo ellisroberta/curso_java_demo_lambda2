@@ -1,104 +1,41 @@
-# Problema exemplo
+# Programa de Filtragem de Produtos
 
-Fazer um programa que, a partir de uma lista de produtos, remova da lista somente aqueles cujo preço mínimo seja 100.
+## Descrição do Problema
 
-## Implementação da interface
+Este programa tem como objetivo criar uma lista de produtos e remover aqueles cujo preço é maior ou igual a 100. A implementação demonstra o uso de diferentes técnicas de filtragem, incluindo métodos estáticos, não estáticos e expressões lambda.
 
-* Classe **Program**:
-    * No método main, é criada uma lista de produtos e alguns produtos são adicionados a ela. 
-    * O método removeIf é chamado na lista, passando uma instância de ProductPredicate. Esse método irá remover todos os produtos que atenderem a condição definida no test do predicado.
+## Estrutura do Código
 
-* Classe **ProductPredicate**:
-  * Implementa a interface Predicate<Product>, que exige a implementação do método test.
-  * O método test verifica se o preço do produto é maior ou igual a 100. Se for, retorna true, o que resulta na remoção do produto da lista.
+### Classe **Program**
+- O método `main` cria uma lista de produtos e adiciona alguns itens a ela.
+- O método `removeIf` é chamado na lista, utilizando uma expressão lambda ou um método de referência para remover produtos que atendem a uma condição específica.
 
-* Classe **Product**:
-  * Representa um produto com atributos name e price. 
-  * Contém métodos para acessar e modificar esses atributos (getters e setters). 
-  * Tem um método toString que formata a saída do produto, facilitando a visualização.
+### Classe **ProductPredicate**
+- Implementa a interface `Predicate<Product>`, que requer a implementação do método `test`.
+- O método `test` verifica se o preço do produto é maior ou igual a 100, retornando `true` para remoção.
 
-## Reference method com método estático
+### Classe **Product**
+- Representa um produto com os atributos `name` e `price`.
+- Contém métodos para acessar e modificar esses atributos (getters e setters).
+- Inclui um método `toString` para formatar a saída do produto, facilitando a visualização.
 
-* Referência a Método Estático:
-  * A linha list.removeIf(Product::staticProductPredicate); utiliza uma referência a método estático. Aqui, Product::staticProductPredicate é uma forma concisa de passar o método staticProductPredicate como um predicado para o método removeIf.
-  * O método removeIf itera sobre a lista e chama staticProductPredicate para cada produto. Se o método retornar true, o produto é removido da lista.
+## Métodos de Filtragem
 
-* Método Estático staticProductPredicate:
-  * Este método é declarado como static, o que significa que ele pertence à classe Product e pode ser chamado sem a necessidade de instanciar um objeto da classe.
-  * O método recebe um objeto Product como argumento e retorna um booleano indicando se o preço do produto é igual ou superior a 100.
+### 1. Referência a Método Estático
+- A linha `list.removeIf(Product::staticProductPredicate);` utiliza uma referência a um método estático.
+- O método `removeIf` itera sobre a lista e chama `staticProductPredicate` para cada produto. Se retornar `true`, o produto é removido.
 
-* Funcionalidade do Programa:
-  * O programa cria uma lista de produtos, adiciona alguns produtos e, em seguida, remove aqueles cujo preço é maior ou igual a 100 usando a referência ao método estático.
-  * Finalmente, imprime os produtos restantes na lista.
+### 2. Referência a Método Não Estático
+- A linha `list.removeIf(Product::nonStaticProductPredicate);` utiliza uma referência a um método não estático.
+- O método `removeIf` itera sobre a lista e chama `nonStaticProductPredicate` em cada instância de `Product`. Se retornar `true`, o produto é removido.
 
-### Resultado do Programa
-Ao executar o programa, a saída será a lista de produtos que têm preço inferior a 100. 
-Portanto, neste caso, o resultado da execução será:
+### 3. Expressão Lambda
+- A expressão lambda `p -> p.getPrice() >= min` é utilizada para definir critérios de filtragem inline.
+- O método `removeIf(pred)` é chamado para remover produtos cujo preço é maior ou igual a 100.
 
-```
-Mouse, 50.00
-HD Case, 80.90
-```
+## Resultados do Programa
 
-Os produtos "Tv" e "Tablet" foram removidos da lista porque seus preços eram iguais ou superiores a 100. 
-A utilização de referência a método estático simplifica o código e melhora a legibilidade.
-
-## Reference method com método não estático
-
-* Referência a Método Não Estático:
-  * A linha list.removeIf(Product::nonStaticProductPredicate); utiliza uma referência a um método não estático. 
-  Aqui, Product::nonStaticProductPredicate é uma forma de passar o método não estático nonStaticProductPredicate como um
-  predicado para o método removeIf.
-  * O método removeIf irá iterar sobre a lista e chamar nonStaticProductPredicate em cada instância de Product. 
-  Se o método retornar true, o produto será removido da lista.
-
-* Método Não Estático nonStaticProductPredicate:
-  * Este método é chamado em uma instância específica de Product, que é passada implicitamente pelo método removeIf.
-  * Ele verifica se o preço do produto (que é um atributo da instância) é maior ou igual a 100 e retorna um booleano.
-
-* Funcionalidade do Programa:
-  * O programa cria uma lista de produtos e adiciona alguns produtos a essa lista.
-  * Em seguida, remove aqueles cujo preço é maior ou igual a 100 usando a referência ao método não estático.
-  * Por fim, imprime os produtos restantes na lista.
-
-### Resultado do Programa
-Ao executar o programa, a saída será a lista de produtos que têm preço inferior a 100.
-Portanto, neste caso, o resultado da execução será:
-
-```
-Mouse, 50.00
-HD Case, 80.90
-```
-
-Os produtos "Tv" e "Tablet" foram removidos da lista porque seus preços eram iguais ou superiores a 100. 
-A utilização de referência a método não estático permite que o código permaneça legível e mantenha a lógica encapsulada 
-dentro das instâncias da classe Product.
-
-## Expressão lambda declarada
-
-* Criação da Lista de Produtos:
-  * O programa cria uma lista (ArrayList) e adiciona quatro produtos com seus respectivos preços.
-
-* Definição do Preço Mínimo:
-  * Um valor mínimo (min) é definido como 100.0, que será usado para filtrar os produtos.
-
-* Uso de Expressão Lambda:
-  * A expressão lambda p -> p.getPrice() >= min é definida como um predicado (Predicate<Product>). Aqui:
-    * p é o parâmetro que representa uma instância da classe Product.
-    * p.getPrice() >= min é a condição que verifica se o preço do produto p é maior ou igual a min.
-  * As expressões lambda permitem criar implementações de interfaces funcionais de maneira concisa e legível.
-
-* Remoção de Produtos:
-  * O método removeIf(pred) é chamado na lista, que itera sobre cada produto. 
-  Se a condição do predicado for verdadeira (ou seja, se o preço do produto for maior ou igual a 100),
-  o produto será removido da lista.
-
-* Impressão dos Produtos Restantes:
-  * Após a remoção, o programa imprime os produtos restantes na lista, que são aqueles com preço inferior a 100.
-
-### Resultado do Programa
-Ao executar o programa, a saída será a lista de produtos que têm preço inferior a 100.
-Portanto, neste caso, o resultado da execução será:
+Ao executar o programa, a saída será a lista de produtos que têm preço inferior a 100. Portanto, neste caso, o resultado será:
 
 ```
 Mouse, 50.00
@@ -106,40 +43,9 @@ HD Case, 80.90
 ```
 
 Os produtos "Tv" e "Tablet" foram removidos da lista porque seus preços eram iguais ou superiores a 100.
-Essa implementação demonstra como as expressões lambda podem simplificar o código e torná-lo mais legível ao lidar com 
-operações de filtragem em coleções.
+A utilização de referências a métodos e expressões lambda simplifica o código e melhora a legibilidade.
 
-## Expressão lambda inline
+## Conclusão
 
-* Criação da Lista de Produtos:
-  * O programa cria uma lista (ArrayList) e adiciona quatro produtos com seus respectivos preços.
-
-* Definição do Preço Mínimo:
-  * Um valor mínimo (min) é definido como 100.0, que será usado para filtrar os produtos.
-
-* Uso da Expressão Lambda Inline:
-  * A linha list.removeIf(p -> p.getPrice() >= min); utiliza uma expressão lambda inline.
-  Aqui, p representa cada instância de Product na lista.
-  * A expressão p -> p.getPrice() >= min é uma implementação da interface funcional Predicate<Product>,
-  que indica que queremos remover produtos cujo preço é maior ou igual a min.
-  * Essa é uma forma concisa de passar uma implementação de um método que aceita um Product e retorna um boolean.
-
-* Remoção de Produtos:
-  * O método removeIf itera sobre a lista e aplica a expressão lambda a cada produto. 
-  Se a condição for verdadeira (ou seja, se o preço do produto for maior ou igual a 100), o produto será removido da lista.
-
-* Impressão dos Produtos Restantes:
-  * Após a remoção, o programa imprime os produtos restantes na lista, que são aqueles com preço inferior a 100.
-
-### Resultado do Programa
-Ao executar o programa, a saída será a lista de produtos que têm preço inferior a 100.
-Portanto, neste caso, o resultado da execução será:
-
-```
-Mouse, 50.00
-HD Case, 80.90
-```
-
-Os produtos "Tv" e "Tablet" foram removidos da lista porque seus preços eram iguais ou superiores a 100. 
-A utilização de uma expressão lambda inline permite que o código seja mais limpo e fácil de entender, 
-ao mesmo tempo que mantém toda a lógica necessária para a filtragem dos produtos.
+Este programa demonstra a eficácia de diferentes abordagens para filtrar coleções em Java, utilizando conceitos como métodos estáticos,
+não estáticos e expressões lambda. Essas técnicas ajudam a manter o código conciso e legível.
